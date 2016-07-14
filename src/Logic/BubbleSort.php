@@ -56,13 +56,13 @@ class BubbleSort {
 		else{
 			if($this->getSwapCounter() == 0){
 				$this->sort_finished();
-				return;
+				return 'Critical Error: [step()] We have returned nothing to render';
 			}
 			else{
 				$this->setSwapCounter(0);
 			}
 		}
-		$this->redraw_table();
+		return $this->redraw_table();
 	}
 
 	/**

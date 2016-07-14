@@ -5,29 +5,12 @@
 
 /** Style rules for general containers/tags **/
 .button-container{
-    float: right;
-    max-width: 200px;
     padding: 1em;
 }
 
 /** Stylings for the bubblesort-container and its table **/
 .bubblesort-container{
-    float: left;
-    max-width: 400px;
     padding: 1em;
-}
-
-.bubblesort-container table{
-    min-width:200px;
-    margin:auto;
-    border: solid #cccccc 1px;
-    border-radius: 5px;
-    border-collapse: collapse;
-    padding: 1em;
-}
-
-.bubblesort-container thead{
-    background-image: linear-gradient(to bottom, #F0F0F0, #99FF99)
 }
 
 .bubblesort-container tbody>tr .color-bar{
@@ -36,11 +19,6 @@
 
 .bubblesort-container .highlighted-row .color-bar{
     background-color: red;
-}
-
-.bubblesort-container td, .bubblesort-container th{
-    padding: 3px;
-    border-bottom: solid #F0F0F0 1px;
 }
 
 /**
@@ -57,9 +35,5 @@
         float: left;
         clear: both;
         margin: auto;
-    }
-
-    .bubblesort-container table{
-        min-width: 98%;
     }
 }

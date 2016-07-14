@@ -17,7 +17,7 @@ use Drupal\Core\Ajax\ReplaceCommand;
 use Drupal\bubble_sort_d8_module\Logic\BubbleSort;
 
 class BubbleSortForm extends FormBase{
-
+protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to false
 	/**
 	 * {@inheritdoc}
 	 */
@@ -43,7 +43,7 @@ class BubbleSortForm extends FormBase{
 		$form['buttons']['step'] = array(
 			'#type' => 'submit',
 			'#value' => 'Step',
-			'#disabled' => TRUE,
+			'#disabled' => $this->toggle,
 			'#ajax' => array(
 				'callback' => '::step',
 				'progress' => array(
@@ -55,7 +55,7 @@ class BubbleSortForm extends FormBase{
 		$form['buttons']['play'] = array(
 			'#type' => 'submit',
 			'#value' => 'Play',
-			'#disabled' => TRUE,
+			'#disabled' => $this->toggle,
 			'#ajax' => array(
 				'callback' => '::play',
 				'progress' => array(
@@ -89,11 +89,22 @@ class BubbleSortForm extends FormBase{
 	 * 
 	 * @return \Drupal\Core\Ajax\AjaxResponse -> Replace the 'bubblesort-cotainer' div
 	 */
-	//TODO: Enable the Step/Play buttons
-	public function initialize(){
+	public function initialize($form){
+
+		//TODO: Enable Step/Play Buttons. On hold for now.
+		/**
+		$this->toggle = false;
+		//$form_state->getCompleteForm()['buttons']['step']['disabled'] = $this->toggle;
+		//$form_state->getCompleteForm()['buttons']['step']['disabled'] = $this->toggle;
+		$form_state = new FormState();
+		$form_state ->setRebuild();
+		$form = $this->buildForm($form, $form_state);
+		 **/
+
 		//We need an instance of the BubbleSort object
 		$bubble_sort = new BubbleSort;
 		$markup = $bubble_sort->initialize();
+		$_SESSION['bubblesort']['entity'] = $bubble_sort;
 		$response = new AjaxResponse();
 		$response->addCommand(new ReplaceCommand(
 			'.bubblesort-container',
@@ -109,11 +120,14 @@ class BubbleSortForm extends FormBase{
 	 * 
 	 * @return \Drupal\Core\Ajax\AjaxResponse -> Replace the 'bubblesort-container' div
 	 */
+	//TODO: Needs the win condition to be handled
 	public function step(){
 		$response = new AjaxResponse();
+		$bubble_sort = $_SESSION['bubblesort']['entity'];
+		$markup = $bubble_sort->step();
 		$response->addCommand(new ReplaceCommand(
 			'.bubblesort-container',
-			'<div class="bubblesort-container">FOO</div>'));
+			'<div class="bubblesort-container">'. $markup . '</div>'));
 		return $response;
 	}
 

@@ -1,0 +1,5 @@
+bubble_sort_d8_css:
+  version: 1.x.x
+  css:
+    base:
+      css/style.css: {}

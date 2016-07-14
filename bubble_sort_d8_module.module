@@ -1,0 +1,20 @@
+<?php
+/**
+* @file
+* Runs a Bubble Sort Algorithm on 10 randomly selected integers
+* This file in particular routes the various pages to the correct TWIG templates.
+*/
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+* Implements hook_theme()
+*/
+function bubble_sort_d8_module_theme($existing, $type, $theme, $path) {
+  return array(
+    'bubble_sort_d8' => array(
+      'variables' => array(),
+      'template' => 'bubble_sort_d8_module',
+    ),
+  );
+}

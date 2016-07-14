@@ -1,0 +1,7 @@
+bubble_sort_d8_module.content:
+  path: '/bubble_sort_d8'
+  defaults:
+    _controller: 'Drupal\bubble_sort_d8_module\Controller\BubbleSortController::content'
+    _title: 'Bubble Sort D8 Module - Home'
+  requirements:
+    _permission: 'access content'

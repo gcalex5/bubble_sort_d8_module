@@ -1,0 +1,8 @@
+name: Bubble Sort D8 Module
+type: module
+description: 'Runs a Bubble Sort Algorithm on 10 randomly selected integers'
+core: 8.x
+
+configure: bubble_sort_d8_module.settings
+
+libraries:

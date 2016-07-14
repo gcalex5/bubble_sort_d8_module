@@ -1,0 +1,6 @@
+{
+  "name": "drupal/bubble_sort_d8_module",
+  "description": "Runs a Bubble Sort Algorithm on 10 randomly selected integers",
+  "type": "drupal-module",
+  "license": "placeholder"
+}

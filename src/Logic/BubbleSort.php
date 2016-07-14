@@ -7,14 +7,19 @@
  * Time: 12:59 PM
  */
 
+namespace Drupal\bubble_sort_d8_module\Logic;
+
 class BubbleSort {
 	//Declaration of protected globals
 	protected $integer_array = array(); //Array holding 10 integers to be sorted
 	protected $cur_pos; //Current position we are at in the array
 	protected $swap_counter=0; //Counter variable to determine if we've made a full pass
 
+
 	/**
-	 * Initialize the data needed to run the sort
+	 * Initialize the data needed to run the sort and redraw the table
+	 *
+	 * @return string -> markup for the table
 	 */
 	function initialize(){
 		$this->setCurPos(0);
@@ -23,7 +28,7 @@ class BubbleSort {
 			$local_array[$x] = rand(0, 100);
 		}
 		$this->setIntegerArray($local_array);
-		$this->redraw_table();
+		return $this->redraw_table();
 	}
 
 	/**
@@ -64,6 +69,7 @@ class BubbleSort {
 	 *
 	 */
 	function redraw_table(){
+		//Why would we ever be here if the IntegerArray is empty.
 		if(sizeof($this->getIntegerArray())>0){
 			$tmp='<table><thead><th>Bubble Sort Table</th></thead><tbody>';
 			for ($x=0; $x<10; $x++) {
@@ -75,17 +81,16 @@ class BubbleSort {
 				}
 			}
 			$tmp.='</tbody></table>';
-			echo $tmp;
 			if($this->getCurPos() == 9){
 				$this->setCurPos(0);
 			}
 			else{
 				$this->setCurPos($this->getCurPos()+ 1);
 			}
+			return $tmp;
 		}
-		//Otherwise go back where we came from
 		else{
-			return;
+			return 'Critical Error: [redraw_table()]The Integer Array was never defined.';
 		}
 	}
 

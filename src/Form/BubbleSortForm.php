@@ -12,6 +12,9 @@ namespace Drupal\bubble_sort_d8_module\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Ajax\AjaxResponse;
+use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\bubble_sort_d8_module\Logic\BubbleSort;
 
 class BubbleSortForm extends FormBase{
 
@@ -40,6 +43,7 @@ class BubbleSortForm extends FormBase{
 		$form['buttons']['step'] = array(
 			'#type' => 'submit',
 			'#value' => 'Step',
+			'#disabled' => TRUE,
 			'#ajax' => array(
 				'callback' => '::step',
 				'progress' => array(
@@ -51,6 +55,7 @@ class BubbleSortForm extends FormBase{
 		$form['buttons']['play'] = array(
 			'#type' => 'submit',
 			'#value' => 'Play',
+			'#disabled' => TRUE,
 			'#ajax' => array(
 				'callback' => '::play',
 				'progress' => array(
@@ -77,14 +82,44 @@ class BubbleSortForm extends FormBase{
 		//Placeholder at the moment
 	}
 
+	/**
+	 * Called via the 'Shuffle' Button
+	 * Initializes the array of 10 Random integers and
+	 * Draws the table for the first time
+	 * 
+	 * @return \Drupal\Core\Ajax\AjaxResponse -> Replace the 'bubblesort-cotainer' div
+	 */
+	//TODO: Enable the Step/Play buttons
 	public function initialize(){
-		//TODO: Call out to the BubbleSort Initialize function
+		//We need an instance of the BubbleSort object
+		$bubble_sort = new BubbleSort;
+		$markup = $bubble_sort->initialize();
+		$response = new AjaxResponse();
+		$response->addCommand(new ReplaceCommand(
+			'.bubblesort-container',
+			'<div class="bubblesort-container">'. $markup .'</div>'));
+		return $response;
 	}
 
+
+	/**
+	 * Called via the 'Step' Button
+	 * Runs one 'Step' of the Bubble Sort Algorithm and
+	 * Then redraws the updated table
+	 * 
+	 * @return \Drupal\Core\Ajax\AjaxResponse -> Replace the 'bubblesort-container' div
+	 */
 	public function step(){
-		//TODO: Call out to the BubbleSort Step function
+		$response = new AjaxResponse();
+		$response->addCommand(new ReplaceCommand(
+			'.bubblesort-container',
+			'<div class="bubblesort-container">FOO</div>'));
+		return $response;
 	}
 
+	/**
+	 * Figure out last
+	 */
 	public function play(){
 		//TODO: Figure out how we want to handle the play logic
 	}

@@ -21,7 +21,6 @@ class BubbleSortController extends ControllerBase {
    */
   public function content() {
     //Logic to call and create our Form holding the Shuffle/Step/Play buttons
-    //TODO: Figure out why this is returning '0'
     $bubble_sort_form_block = \Drupal::service('plugin.manager.block')->createInstance('bubble_sort_form_block', []);
     $block_content = $bubble_sort_form_block->build();
 

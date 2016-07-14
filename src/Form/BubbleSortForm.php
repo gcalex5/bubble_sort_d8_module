@@ -57,7 +57,7 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 			'#value' => 'Play',
 			'#disabled' => $this->toggle,
 			'#ajax' => array(
-				'callback' => '::play',
+				'callback' => array('::play', '::play_test'),
 				'progress' => array(
 					'type' => 'throbber',
 					'message' => "Running Sort To Completion",
@@ -89,7 +89,7 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 	 * 
 	 * @return \Drupal\Core\Ajax\AjaxResponse -> Replace the 'bubblesort-cotainer' div
 	 */
-	public function initialize($form){
+	public function initialize(){
 
 		//TODO: Enable Step/Play Buttons. On hold for now.
 		/**
@@ -132,9 +132,17 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 	}
 
 	/**
-	 * Figure out last
+	 *
+	 * @return \Drupal\Core\Ajax\AjaxResponse
 	 */
 	public function play(){
-		//TODO: Figure out how we want to handle the play logic
+		return $this->step();
+	}
+
+	/**
+	 * 
+	 */
+	public function play_test(){
+
 	}
 }

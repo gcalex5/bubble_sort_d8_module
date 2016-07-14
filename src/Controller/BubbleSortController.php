@@ -14,9 +14,20 @@ use Drupal\Core\Controller\ControllerBase;
 
 class BubbleSortController extends ControllerBase {
 
+  /**
+   * Controller function for the front page of the Bubble Sort module
+   *
+   * @return array - Render array containing the appropriate markup
+   */
   public function content() {
+    //Logic to call and create our Form holding the Shuffle/Step/Play buttons
+    //TODO: Figure out why this is returning '0'
+    $bubble_sort_form_block = \Drupal::service('plugin.manager.block')->createInstance('bubble_sort_form_block', []);
+    $block_content = $bubble_sort_form_block->build();
+
     return array(
       '#theme' => 'bubble_sort_d8_module',
+      '#form_content' => $block_content,
     );
   }
 }

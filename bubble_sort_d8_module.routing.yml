@@ -5,3 +5,11 @@ bubble_sort_d8_module.content:
     _title: 'Bubble Sort D8 Module - Home'
   requirements:
     _permission: 'access content'
+
+bubble_sort_d8_module.play_callback:
+  path: '/bubble_sort_d8'
+  defaults:
+    _controller: '\Drupal\bubble_sort_d8_module\Controller\BubbleSortController::play_callback'
+    _title: 'Bubble Sort D8 Module - Callback'
+  requirements:
+    _permission: 'access content'

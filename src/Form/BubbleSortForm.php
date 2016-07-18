@@ -10,6 +10,7 @@
 
 namespace Drupal\bubble_sort_d8_module\Form;
 
+use Drupal\bubble_sort_d8_module\Ajax\PlayCommand;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
@@ -57,7 +58,7 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 			'#value' => 'Play',
 			'#disabled' => $this->toggle,
 			'#ajax' => array(
-				'callback' => array('::play', '::play_test'),
+				'callback' => '::play',
 				'progress' => array(
 					'type' => 'throbber',
 					'message' => "Running Sort To Completion",
@@ -136,13 +137,8 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 	 * @return \Drupal\Core\Ajax\AjaxResponse
 	 */
 	public function play(){
-		return $this->step();
-	}
-
-	/**
-	 * 
-	 */
-	public function play_test(){
-
+		$response = new AjaxResponse();
+		$response->addCommand(new PlayCommand('.bubblesort-container', $this->step()));
+		return $response;
 	}
 }

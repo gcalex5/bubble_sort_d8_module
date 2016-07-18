@@ -9,6 +9,10 @@
 
 namespace Drupal\bubble_sort_d8_module\Logic;
 
+if(1 == 1){
+
+}
+
 class BubbleSort {
 	//Declaration of protected globals
 	protected $integer_array = array(); //Array holding 10 integers to be sorted

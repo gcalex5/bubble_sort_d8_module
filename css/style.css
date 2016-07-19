@@ -1,3 +1,39 @@
 /**
 * Styles for the Bubble Sort D8 Module
 **/
+
+
+/** Style rules for general containers/tags **/
+.button-container{
+    padding: 1em;
+}
+
+/** Stylings for the bubblesort-container and its table **/
+.bubblesort-container{
+    padding: 1em;
+}
+
+.bubblesort-container tbody>tr .color-bar{
+    background-color: yellow;
+}
+
+.bubblesort-container .highlighted-row .color-bar{
+    background-color: red;
+}
+
+/**
+* Small screen support.
+* Needs to be expanded to support a wider range of devices
+**/
+@media all and (max-width: 500px){
+    .bubblesort-container{
+        float: none;
+        clear: both;
+    }
+
+    .button-container{
+        float: left;
+        clear: both;
+        margin: auto;
+    }
+}

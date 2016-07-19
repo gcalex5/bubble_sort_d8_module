@@ -1,6 +1,8 @@
 <?php
 /**
- * -->Initial Commit of this Logic just to have it here <--
+ * Handles all of the Bubble Sort specific logic as well as generating
+ * the necessary markup that is returned to the frontend
+ *
  * Created by PhpStorm.
  * User: Alex
  * Date: 7/14/16
@@ -9,16 +11,11 @@
 
 namespace Drupal\bubble_sort_d8_module\Logic;
 
-if(1 == 1){
-
-}
-
 class BubbleSort {
 	//Declaration of protected globals
 	protected $integer_array = array(); //Array holding 10 integers to be sorted
 	protected $cur_pos; //Current position we are at in the array
 	protected $swap_counter=0; //Counter variable to determine if we've made a full pass
-
 
 	/**
 	 * Initialize the data needed to run the sort and redraw the table
@@ -70,7 +67,7 @@ class BubbleSort {
 	}
 
 	/**
-	 *
+   * Generates the necessary markup to redraw the table
 	 */
 	function redraw_table(){
 		//Why would we ever be here if the IntegerArray is empty.
@@ -78,10 +75,13 @@ class BubbleSort {
 			$tmp='<table><thead><th>Bubble Sort Table</th></thead><tbody>';
 			for ($x=0; $x<10; $x++) {
 				if ($x == $this->getCurPos() || $x == ($this->getCurPos() + 1)){
-					$tmp .= '<tr class="highlighted-row"><td><div class="color-bar" style="width: '. $this->getIntegerArray()[$x] . '%;">' . $this->getIntegerArray()[$x] . '</div></td></tr>';
+					$tmp .= '<tr class="highlighted-row"><td><div class="color-bar" style="width: '
+						. $this->getIntegerArray()[$x] . '%;">' . $this->getIntegerArray()[$x]
+            . '</div></td></tr>';
 				}
 				else{
-					$tmp .= '<tr><td><div class="color-bar" style="width: '. $this->getIntegerArray()[$x] . '%;">' . $this->getIntegerArray()[$x] . '</div></td></tr>';
+					$tmp .= '<tr><td><div class="color-bar" style="width: '. $this->getIntegerArray()[$x]
+            . '%;">' . $this->getIntegerArray()[$x] . '</div></td></tr>';
 				}
 			}
 			$tmp.='</tbody></table>';

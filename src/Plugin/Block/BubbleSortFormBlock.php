@@ -1,6 +1,7 @@
 <?php
 /**
- * Created by PhpStorm.
+ * Handles the creation of the Block containing the 'BubbleSortForm'
+ *
  * User: Alex
  * Date: 7/14/16
  * Time: 12:42 PM
@@ -17,11 +18,10 @@ use Drupal\Core\Block\BlockBase;
  *   admin_label = @Translation("Bubble Sort Form Block"),
  * )
  */
-
 class BubbleSortFormBlock extends BlockBase {
 
 	/**
-	 * @return array
+	 * @return array -> Returns array containing the form
 	 */
 	public function build(){
 		return \Drupal::formBuilder()->getForm('Drupal\bubble_sort_d8_module\Form\BubbleSortForm');

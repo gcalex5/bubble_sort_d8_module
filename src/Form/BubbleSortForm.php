@@ -91,17 +91,6 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 	 * @return \Drupal\Core\Ajax\AjaxResponse -> Replace the 'bubblesort-cotainer' div
 	 */
 	public function initialize(){
-
-		//TODO: Enable Step/Play Buttons. On hold for now.
-		/**
-		$this->toggle = false;
-		//$form_state->getCompleteForm()['buttons']['step']['disabled'] = $this->toggle;
-		//$form_state->getCompleteForm()['buttons']['step']['disabled'] = $this->toggle;
-		$form_state = new FormState();
-		$form_state ->setRebuild();
-		$form = $this->buildForm($form, $form_state);
-		 **/
-
 		//We need an instance of the BubbleSort object
 		$bubble_sort = new BubbleSort;
 		$markup = $bubble_sort->initialize();
@@ -121,7 +110,6 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 	 * 
 	 * @return \Drupal\Core\Ajax\AjaxResponse -> Replace the 'bubblesort-container' div
 	 */
-	//TODO: Needs the win condition to be handled
 	public function step(){
 		$response = new AjaxResponse();
 		$bubble_sort = $_SESSION['bubblesort']['entity'];

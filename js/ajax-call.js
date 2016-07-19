@@ -12,6 +12,7 @@ var passData = null; //temp variable used to pass an AJAX result to successfulCa
     Drupal.AjaxCommands.prototype.invokeBubble = function(ajax, response, status){
         for(var x=0; x<100; x++){
             jQuery.ajax({
+                async: true,
                 url: drupalSettings.path.baseUrl + 'bubble_sort_d8?op=PLAY',
                 type: "get",
                 data: { operation: "PLAY" },
@@ -21,11 +22,19 @@ var passData = null; //temp variable used to pass an AJAX result to successfulCa
             }).then(function(){
                     successfulCall(passData);
             });
+            console.log(x);
+            if(x == 99){
+                //workaround for always doing 100 iterations and never hitting done_yet
+                console.log("We are enabling");
+                jQuery( "#edit-shuffle" ).prop( "disabled", false );
+            }
             if(done_yet == true){
-                console.log("we are done here");
+                console.log("We are done");
+                jQuery( "#edit-shuffle" ).prop( "disabled", false );
                 break;
             }
         }
+
     }
 })(jQuery, this, Drupal, drupalSettings);
 
@@ -36,8 +45,6 @@ var passData = null; //temp variable used to pass an AJAX result to successfulCa
  */
 function successfulCall(data){
     if(data[0].toString() == "disable"){
-        //document.getElementById("step").disabled = true;
-        //document.getElementById("play").disabled = true;
         done_yet = true;
     }
     else{
@@ -47,3 +54,10 @@ function successfulCall(data){
         }
     }
 }
+/**
+ *
+ */
+jQuery( document ).ready(function() {
+    jQuery( "#edit-step" ).prop( "disabled", true );
+    jQuery( "#edit-play" ).prop( "disabled", true );
+});

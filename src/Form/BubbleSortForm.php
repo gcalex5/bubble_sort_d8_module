@@ -15,10 +15,10 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Ajax\AjaxResponse;
 use Drupal\Core\Ajax\ReplaceCommand;
+use Drupal\Core\Ajax\InvokeCommand;
 use Drupal\bubble_sort_d8_module\Logic\BubbleSort;
 
 class BubbleSortForm extends FormBase{
-protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to false
 	/**
 	 * {@inheritdoc}
 	 */
@@ -44,7 +44,6 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 		$form['buttons']['step'] = array(
 			'#type' => 'submit',
 			'#value' => 'Step',
-			'#disabled' => $this->toggle,
 			'#ajax' => array(
 				'callback' => '::step',
 				'progress' => array(
@@ -56,7 +55,6 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 		$form['buttons']['play'] = array(
 			'#type' => 'submit',
 			'#value' => 'Play',
-			'#disabled' => $this->toggle,
 			'#ajax' => array(
 				'callback' => '::play',
 				'progress' => array(
@@ -91,7 +89,6 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 	 * @return \Drupal\Core\Ajax\AjaxResponse -> Replace the 'bubblesort-cotainer' div
 	 */
 	public function initialize(){
-		//We need an instance of the BubbleSort object
 		$bubble_sort = new BubbleSort;
 		$markup = $bubble_sort->initialize();
 		$_SESSION['bubblesort']['entity'] = $bubble_sort;
@@ -99,9 +96,10 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 		$response->addCommand(new ReplaceCommand(
 			'.bubblesort-container',
 			'<div class="bubblesort-container">'. $markup .'</div>'));
+    $response->addCommand(new InvokeCommand('#edit-step', 'prop' , array('disabled', FALSE)));
+    $response->addCommand(new InvokeCommand('#edit-play', 'prop' , array('disabled', FALSE)));
 		return $response;
 	}
-
 
 	/**
 	 * Called via the 'Step' Button
@@ -111,6 +109,7 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 	 * @return \Drupal\Core\Ajax\AjaxResponse -> Replace the 'bubblesort-container' div
 	 */
 	public function step(){
+    //TODO: handle win condition then remove javascript workaround
 		$response = new AjaxResponse();
 		$bubble_sort = $_SESSION['bubblesort']['entity'];
 		$markup = $bubble_sort->step();
@@ -126,7 +125,10 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 	 */
 	public function play(){
 		$response = new AjaxResponse();
-		$response->addCommand(new PlayCommand());
+    $response->addCommand(new InvokeCommand('#edit-shuffle', 'prop' , array('disabled', TRUE)));
+    $response->addCommand(new InvokeCommand('#edit-step', 'prop' , array('disabled', TRUE)));
+    $response->addCommand(new InvokeCommand('#edit-play', 'prop' , array('disabled', TRUE)));
+    $response->addCommand(new PlayCommand());
 		return $response;
 	}
 }

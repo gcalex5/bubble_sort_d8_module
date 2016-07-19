@@ -12,14 +12,12 @@ namespace Drupal\bubble_sort_d8_module\Ajax;
 use Drupal\Core\Ajax\CommandInterface;
 
 class PlayCommand implements CommandInterface {
-  protected $markup;
 
   /**
    * PlayCommand constructor.
-   * @param $markup -> table markup
    */
-  public function __construct($markup) {
-    $this->markup = $markup;
+  public function __construct() {
+    //Empty constructor not necessary?
   }
 
   /**
@@ -28,8 +26,7 @@ class PlayCommand implements CommandInterface {
    */
   public function render() {
     return array(
-      'command' => 'invokeBubble',
-      'markup' => $this->markup,
+      'command' => 'invokeBubble'
     );
   }
 

@@ -126,7 +126,7 @@ protected $toggle = FALSE; //Toggle for enable/disable buttons //TODO: Switch to
 	 */
 	public function play(){
 		$response = new AjaxResponse();
-		$response->addCommand(new PlayCommand('.bubblesort-container', $this->step()));
+		$response->addCommand(new PlayCommand());
 		return $response;
 	}
 }
